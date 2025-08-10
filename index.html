@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recrutmen DPM Universitas An Nuur</title>
+    <meta property="og:image" content="dpm.png" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-color: #025464;
+            --secondary-color: #E57C23;
+            --accent-color: #F8F1F1;
+            --dark-color: #0A2647;
+            --light-color: #f5f5f5;
+        }
+
+        body {
+            background-color: var(--light-color);
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Mobile Frame */
+        .mobile-container {
+            max-width: 100%;
+            margin: 0 auto;
+            position: relative;
+            min-height: 100vh;
+            background-color: white;
+        }
+
+        @media (min-width: 768px) {
+            body {
+                background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
+                padding: 20px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
+            }
+            
+            .mobile-container {
+                max-width: 414px;
+                height: 90vh;
+                border-radius: 30px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+                overflow-y: auto;
+                overflow-x: hidden;
+                position: relative;
+            }
+        }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.05);
+                opacity: 0.8;
+            }
+        }
+
+        @keyframes wave {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo-container {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 15px;
+            border-radius: 50%;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            animation: pulse 3s infinite;
+            overflow: hidden;
+        }
+
+        .logo-container img {
+            max-width: 80%;
+            max-height: 80%;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .abstract-shape {
+            position: absolute;
+            opacity: 0.1;
+            z-index: 1;
+        }
+
+        .shape-1 {
+            width: 200px;
+            height: 200px;
+            background: var(--secondary-color);
+            border-radius: 50%;
+            top: -50px;
+            left: -50px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .shape-2 {
+            width: 150px;
+            height: 150px;
+            background: var(--accent-color);
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            bottom: -30px;
+            right: -30px;
+            animation: float 8s ease-in-out infinite reverse;
+        }
+
+        /* Poster Section */
+        .poster-section {
+            padding: 20px;
+            text-align: center;
+            background-color: var(--accent-color);
+            margin: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .poster-section:hover {
+            transform: translateY(-5px);
+        }
+
+        .poster-container {
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .poster-container img {
+            width: 100%;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .poster-container img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Form Section */
+        .form-section {
+            background: white;
+            margin: 20px;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .form-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        }
+
+        h2 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+
+        .form-link {
+            display: block;
+            background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
+            color: white;
+            text-decoration: none;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            text-align: center;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .form-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-link::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to bottom right,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0) 45%,
+                rgba(255, 255, 255, 0.5) 50%,
+                rgba(255, 255, 255, 0) 55%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            transform: rotate(30deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% {
+                left: -50%;
+                top: -50%;
+            }
+            100% {
+                left: 150%;
+                top: 150%;
+            }
+        }
+
+        .form-link i {
+            margin-right: 10px;
+        }
+
+        /* Info Section */
+        .info-section {
+            background: white;
+            margin: 20px;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-item {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .info-item h3 {
+            color: var(--secondary-color);
+            margin-bottom: 5px;
+            font-size: 1.2rem;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+            margin: 20px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--secondary-color);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -30px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            border: 2px solid var(--secondary-color);
+        }
+
+        .timeline-date {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        /* Floating Elements */
+        .floating-element {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            border-radius: 10px;
+            z-index: 0;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            margin: 15px 0;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            margin: 0 10px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: white;
+            color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            margin-top: 15px;
+        }
+
+        /* Particles */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: float-particle linear infinite;
+        }
+
+        @keyframes float-particle {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Floating Button */
+        .floating-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--secondary-color), #ff8c00);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            z-index: 100;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+
+        .floating-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .subtitle {
+                font-size: 0.9rem;
+            }
+            
+            .poster-section, .form-section, .info-section {
+                margin: 15px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="mobile-container">
+        <!-- Floating Particles -->
+        <div class="particles" id="particles"></div>
+        
+        <!-- Header with Logo -->
+        <header>
+            <div class="abstract-shape shape-1"></div>
+            <div class="abstract-shape shape-2"></div>
+            
+            <div class="header-content">
+                <div class="logo-container">
+                    <img src="logo.png" alt="Logo DPM" id="logo">
+                </div>
+                <h1>RECRUITMEN ANGGOTA DPM</h1>
+                <p class="subtitle">Universitas An Nuur Tahun 2025</p>
+                <p class="subtitle">"Bersama wujudkan suara mahasiswa!"</p>
+            </div>
+        </header>
+        
+        <!-- Poster Section -->
+        <section class="poster-section">
+            <h2></h2>
+            <div class="poster-container">
+                <img src="dpm.png" alt="Poster Rekrutmen DPM" id="poster">
+            </div>
+        </section>
+        
+        <!-- Form Section -->
+        <section class="form-section">
+            <h2>FORMULIR</h2>
+            <a href="https://forms.gle/MStCtqy5gheCtuUYA" class="form-link" >
+                <i>📋</i> Pendaftaran
+            </a>
+            <a href="https://docs.google.com/document/d/1yXkYLBtIB2cX_op6opgYjhl5iwcV7Oog/edit?usp=sharing&ouid=107950496991930990236&rtpof=true&sd=true" class="form-link" id="driveLink">
+                <i>📁</i> download template
+            </a>
+            <a href="https://drive.google.com/drive/folders/1jyKIwo5iLJnscMnQr_vwe0y9H4Hhlwqq?usp=drive_link" class="form-link" id="driveLink">
+                <i>📁</i> Upload Persyaratan
+            </a>
+            <a href="https://drive.google.com/file/d/1lh2nBpDNkwZKIu7smTtDN2fedZf8IBRo/view?usp=sharing" class="form-link" id="driveLink">
+                <i>📁</i> donload twibon
+            </a>
+        </section>
+        
+        <!-- Info Section -->
+        <section class="info-section">
+            <h2>INFORMASI REKRUTMEN</h2>
+            
+            <div class="info-item">
+                <h3>📅 Timeline Rekrutmen</h3>
+                        <div class="timeline-date">Semua Prosedural Dilaksanakan secara online</div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">10 - 24 Agustus 2025</div>
+                        <div>Pendaftaran</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">25 Agustus 2025</div>
+                        <div>Pengumuman Seleksi Administrasi</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">26 Agustus 2025</div>
+                        <div>Tes Wawancara</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">27 Agustus 2025</div>
+                        <div>Pengumuman Final</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="info-item">
+                <h3>📝 Persyaratan</h3>
+                <ul style="padding-left: 20px;">
+                    <li>Mahasiswa aktif Universitas An Nuur</li>
+                    <li>Memahami TRIDHARMA Perguruan Tinggi</li>
+                    <li>Minimal Semester 2</li>
+                    <li>Berkelakuan baik</li>
+                    <li>Mengisi formulir pendaftaran online dan offline</li>
+                    <li>Mengunggah twibon yang sudah disediakan ke media sosial masing masing</li>
+                    <li>mengisi data administrasi sesuai template yang telah disediakan lalu di kumpulkan dengan format (nama_nim_dpmkm/dpmprodi.pdf)</li>
+                </ul>
+            </div>
+            
+            <div class="info-item">
+                <h3>ℹ️ More Info</h3>
+                <p>Untuk informasi lebih lanjut, silahkan hubungi kontak di bawah ini (klik logo ig atau wa)</p>
+            </div>
+        </section>
+        
+        <!-- Footer -->
+        <footer>
+            <div class="social-links">
+                <a href="https://www.instagram.com/dpm._unan?igsh=dW9icjY5ZjRpYWFj" class="social-link" id="igLink">
+                    <i class="bi bi-instagram"></i>
+                </a>
+                <a href="https://wa.me/qr/7TRNE3RCXHFPJ1" class="social-link" id="waLink">
+                    <i class="bi bi-whatsapp"></i>
+                </a>
+            </div>
+            <p>Dewan Perwakilan Mahasiswa<br>Universitas An Nuur</p>
+            <p class="copyright">© 2025 DPM Univeristas An Nuur. All Rights Reserved.</p>
+        </footer>
+        
+        <!-- Floating Button -->
+        <div class="floating-btn" id="floatingBtn">↑</div>
+    </div>
+
+    <script>
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 20;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Random properties
+                const size = Math.random() * 5 + 3;
+                const posX = Math.random() * 100;
+                const duration = Math.random() * 10 + 10;
+                const delay = Math.random() * 5;
+                
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${posX}%`;
+                particle.style.bottom = `-${size}px`;
+                particle.style.animationDuration = `${duration}s`;
+                particle.style.animationDelay = `${delay}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        // Floating button functionality
+        function setupFloatingButton() {
+            const floatingBtn = document.getElementById('floatingBtn');
+            
+            floatingBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    floatingBtn.style.display = 'flex';
+                } else {
+                    floatingBtn.style.display = 'none';
+                }
+            });
+        }
+        
+        // Hover effects for links
+        function setupLinkEffects() {
+            const links = document.querySelectorAll('.form-link, .social-link');
+            
+            links.forEach(link => {
+                link.addEventListener('mouseenter', () => {
+                    link.style.transform = 'translateY(-3px)';
+                });
+                
+                link.addEventListener('mouseleave', () => {
+                    link.style.transform = 'translateY(0)';
+                });
+            });
+        }
+        
+        // Dynamic logo and poster (placeholder replacement)
+        function setupDynamicMedia() {
+            // In a real implementation, you would replace these with actual image URLs
+            const logo = document.getElementById('logo');
+            const poster = document.getElementById('poster');
+            const googleFormLink = document.getElementById('googleFormLink');
+            const driveLink = document.getElementById('driveLink');
+            const igLink = document.getElementById('igLink');
+            const waLink = document.getElementById('waLink');
+            
+            // Example of setting real links (replace with actual URLs)
+            googleFormLink.href = 'https://forms.google.com/your-form-link';
+            driveLink.href = 'https://drive.google.com/your-drive-folder';
+            igLink.href = 'https://instagram.com/your-dpm-account';
+            waLink.href = 'https://wa.me/your-whatsapp-number';
+            
+            // Example of loading real images (replace with actual image URLs)
+            // logo.src = 'path/to/your/logo.png';
+            // poster.src = 'path/to/your/poster.jpg';
+        }
+        
+        // Initialize all functions when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+            setupFloatingButton();
+            setupLinkEffects();
+            setupDynamicMedia();
+            
+            // Add animation class to poster section on scroll
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.transform = 'translateY(0)';
+                        entry.target.style.opacity = '1';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            const sections = document.querySelectorAll('.poster-section, .form-section, .info-section');
+            sections.forEach(section => {
+                section.style.transform = 'translateY(20px)';
+                section.style.opacity = '0';
+                section.style.transition = 'transform 0.5s ease, opacity 0.5s ease';
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>
